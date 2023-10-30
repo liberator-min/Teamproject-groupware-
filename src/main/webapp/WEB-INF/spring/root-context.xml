@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+		<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+<!-- 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" /> -->
+<!-- 		<property name="jdbcUrl" value="jdbc:oracle:thin:@192.168.1.100:1521:xe" /> -->
+
+		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
+		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@192.168.1.100:1521:xe" />
+		
+		<property name="username" value="c##itbank" />
+		<property name="password" value="it"/>
+	</bean>
+	
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
+		<constructor-arg ref="hikariConfig"/> 
+	</bean>
+	<!-- 
+		classpath
+			src/main/java
+			src/main/resouces
+		에서 찾아온다
+	 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:mybatis/config.xml"/>
+		<property name="mapperLocations">
+			  <list>
+				<value>classpath:mybatis/home-mapper.xml</value>
+				<value>classpath:mybatis/schedule-mapper.xml</value>
+				<value>classpath:mybatis/upload-mapper.xml</value>
+				<value>classpath:mybatis/board-mapper.xml</value>
+				<value>classpath:mybatis/mail-mapper.xml</value>
+				<value>classpath:mybatis/approval-mapper.xml</value>
+				<value>classpath:mybatis/administrator-mapper.xml</value>
+				<value>classpath:mybatis/receiver-mapper.xml</value>
+				<value>classpath:mybatis/chat-mapper.xml</value>
+				<value>classpath:mybatis/mailfileupload-mapper.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory"/>
+	</bean>
+	
+	<!-- 트랜잭션 어노테이션을 활성화한다 -->
+	<tx:annotation-driven/>
+	
+	<bean id="transactionManager"
+		  class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		  <property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	
+	
+	<context:component-scan base-package="com.team.service"/>
+	<context:component-scan base-package="com.team.exception"/>
+	<context:component-scan base-package="com.team.component"/>
+	<mybatis-spring:scan base-package="com.team.repository"/>
+	<context:component-scan base-package="com.team.config"/>
+</beans>

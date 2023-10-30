@@ -1,0 +1,142 @@
+@charset "utf-8";
+
+#approvalRe_form {
+	position: absolute;
+	top: 22%;
+	width: 650px;
+	left: 30%;
+}
+
+#approvalRe_form>.top {
+	text-align: center;
+	font-size: 25px;
+	margin: 30px 0;
+}
+
+#approval_request_table {
+	border-collapse: collapse;
+	width: 650px;
+}
+
+#approval_request_table>th, td {
+	border: 1px solid black;
+	padding: 10px 8px;
+}
+
+.approvalRe_sa {
+	height: 200px;
+}
+
+.approvalRe_sa>td>.approvalSa_value {
+	width: 100%;
+	height: 250px;
+	border: none;
+	font-size: 16px;
+	outline: none;
+	resize: none;
+	background-color: rgba(246, 246, 246, 0.5);
+}
+
+.approvalRe_value {
+	border: 0;
+	outline: none;
+	font-size: 18px;
+	box-sizing: border-box;
+	background-color: rgba(246, 246, 246, 0.5);
+}
+
+#approvalRe_form>form>input[type='text'] {
+	width: 100%;
+}
+
+#approvalRe_form>form>input[type='date'] {
+	margin: 0 10px;
+	border: 0;
+}
+
+.approvalRe_name {
+	text-align: center;
+}
+
+#approvalRe_bottom {
+	border: 1px solid black;
+	border-top: none;
+	padding-top: 80px;
+	display: flex;
+	padding-left: 340px;
+	padding-bottom: 20px;
+}
+
+#approvalRe_bottom>div {
+	margin-right: 20px;
+}
+
+#approvalRe_bottom>input {
+	width: 50px;
+}
+/* (approval) business_request.jsp에만 필요한 것  */
+.approvalReceiverSelect {
+	font-size: 15px;
+	padding-left: 10px;
+	cursor: pointer;
+}
+
+/* (approval) pay_request.jsp에만 필요한 것  */
+#approvalRe_form::-webkit-scrollbar {
+	display: none;
+}
+<!-- PDF Style -->
+
+   #pdf-wrap {
+   }
+   #pdf-wrap > .pdf-top {
+      margin-left: 16.8%;
+      padding: 3.13% 0;
+      padding-bottom: 2.65%; 
+      font-size: 190%;
+   }
+   #pdf-wrap > .pdf-content {
+      border: 1px solid black;
+      border-bottom: none;
+      width: 39%;
+      margin-left: 4.1%;
+      font-size: 110%;
+   }
+   #pdf-wrap > .pdf-content > .pdf-item {
+      border-bottom: 1px solid black;
+      display: flex;
+   }
+   #pdf-wrap > .pdf-content > .pdf-item > .pdf-name {
+      width: 16%;
+      text-align: center;
+      border-right: 1px solid black;
+      padding: 2% 1.25%;
+   }
+   #pdf-wrap > .pdf-content > .pdf-item > .pdf-detail {
+      margin: auto 0;
+      display: block;
+      margin: 2%;
+   }
+   #pdf-wrap > .pdf-content > .pdf-sa > .pdf-name {
+      border-bottom: none;
+      padding: 28% 1.2%;
+   }
+   #pdf-wrap > .pdf-content > .pdf-sa > .pdf-detail {
+      margin: 2%;
+   }
+   #pdf-bottom {
+      width: 39%;
+      margin-left: 4.1%;
+      border: 1px solid black;
+      border-top: none;
+      text-align: right;
+      font-size: 110%;
+   }
+   #pdf-bottom > .pdf-detail {
+      padding: 1%;   
+      padding-right: 5%;
+      padding-top: 16%;
+      padding-bottom: 3%;
+   }
+
+<!-- PDF Style End -->

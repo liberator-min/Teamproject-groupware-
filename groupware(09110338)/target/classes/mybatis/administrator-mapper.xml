@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!--  namespace : DAO 인터페이스의 풀네임. 패키지부터 인터페이스 이름까지 모두 작성한다 -->
+<mapper namespace="com.team.repository.AdministratorDAO">
+
+	<select id="selectAllMember" resultType="employees">
+		select e.*, j.job_name 
+			from employees e 
+			join job j on job_idx = e.job_id
+            order by employee_idx desc
+	</select>
+
+	<insert id="insertMember" parameterType="employees">
+		insert into employees 
+			(employee_userid, 
+			employee_userpw, 
+			employee_name, 
+			phone_number, 
+			birth_date, 
+			job_id,
+			department,
+			salt)
+		values
+			(#{employee_userid}, 
+			#{employee_userpw}, 
+			#{employee_name}, 
+			#{phone_number}, 
+			#{birth_date}, 
+			#{job_id},
+			#{department},
+			#{salt})
+	</insert>
+	
+	<select id="selectOneMember" parameterType="int" resultType="employees">
+		select e.*, j.job_name 
+			from employees e 
+			join job j on job_idx = e.job_id 
+			where 
+			employee_idx = #{employee_idx}
+	</select>
+	
+	<select id="selectAllJob" resultType="job">
+		select * from job where not job_name = '관리자'
+	</select>
+	
+	<select id="selectAllDepartment" resultType="department">
+		select * from department
+	</select>
+	
+	<update id="updateMember" parameterType="employees">
+		update employees set
+			employee_userid 	= #{employee_userid}, 
+			employee_name 		= #{employee_name}, 
+			phone_number 		= #{phone_number}, 
+			mail				= #{mail}, 
+			recovery_email 		= #{recovery_email}, 
+			birth_date 			= #{birth_date}, 
+			job_id 				= #{job_id}, 
+			department 			= #{department}
+		where employee_idx = #{employee_idx}
+	</update>
+	
+	<delete id="deleteMember" parameterType="int">
+		delete employees where employee_idx = #{employee_idx}
+	</delete>
+	
+	<select id="selectAllApproval" resultType="approval">
+		select 
+			e.employee_name, 
+			j.job_name, 
+		    (select employee_name from employees where employee_userid = a.receiver) as receiver, 
+	        (select employee_name from employees where employee_userid = a.final_receiver) as final_receiver,
+		    a.*
+    	from approval a
+		    join employees e on e.employee_userid = a.writer
+		    join job j on j.job_idx = e.job_id
+		    order by a.approval_idx desc
+	</select>
+	
+	<select id="selectCount" parameterType="string" resultType="int">
+		select count(*) from employees
+		    where employee_userid = #{employee_userid}
+	</select>
+	
+	<select id="selectOneApproval" parameterType="int" resultType="approval">
+		select 
+		    e.employee_name, 
+		    j.job_name, 
+		    (select employee_name from employees where employee_userid = a.receiver) as receiver, 
+		    (select employee_name from employees where employee_userid = a.final_receiver) as final_receiver, 
+		    a.* 
+		from approval a
+		    join employees e on e.employee_userid = a.writer
+		    join job j on j.job_idx = e.job_id
+		    where a.approval_idx = #{idx}
+	</select>
+
+</mapper>

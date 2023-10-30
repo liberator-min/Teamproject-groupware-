@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org/DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.team.repository.MailFileUploadDAO">
+   
+   
+   <!-- mail -->
+   
+   	<insert id="insertMail" parameterType="mail">
+		insert into mail(mail_title,mail_content,mail_writer,mail_receiver)
+		values ( #{mail_title},#{mail_content},#{mail_writer},#{mail_receiver})
+	</insert>
+	
+	<select id="MaxIdxFromMailUpload" resultType="int">
+      select max(mail_idx) from mail
+	</select>
+	<insert id="insertMailFile" parameterType="hashmap">
+		insert into mail_file (mail_id,mail_filepath)
+   		<foreach item="item" collection="list" separator=" UNION ALL ">
+         select #{mailupload}, #{item} from dual 
+		</foreach>
+	</insert>
+   <select id="receiveListSelectMail" parameterType="int" resultType="mail">
+      select 
+          mail.mail_idx,
+          mail.mail_title,
+         (select
+              listagg(mail_filepath, ',')
+                  from mail_file    
+              where
+                  mail_file.mail_id = mail.mail_idx) as mail_filepath
+              from mail
+              where mail.mail_idx = #{mail_idx}
+              order by mail.mail_idx
+   </select>
+   
+   <!-- sendermail -->
+	<insert id="insertSenderMail" parameterType="mail">
+		insert into mail_sender (mail_title,mail_content,mail_writer,mail_receiver)
+		values ( #{mail_title},#{mail_content},#{mail_writer},#{mail_receiver})
+		
+	</insert>
+	
+	<select id="MaxIdxFromMailSenderUpload" resultType="int">
+		select max(mail_idx) from mail_sender
+	</select>
+	
+	<insert id="insertMailSenderFile" parameterType="hashmap">
+		insert into mail_sender_file (mail_id,mail_filepath)
+		<foreach item="item" collection="list" separator=" UNION ALL ">
+			select #{mailupload}, #{item} from dual 
+		</foreach>
+	</insert>
+
+	<select id="sendListSelectMail" parameterType="int" resultType="mail">
+      select 
+          mail_sender.mail_idx,
+          mail_sender.mail_title,
+         (select
+              listagg(mail_filepath, ',')
+                  from mail_sender_file    
+              where
+                  mail_sender_file.mail_id = mail_sender.mail_idx)as mail_filepath
+              from mail_sender
+              where mail_sender.mail_idx = #{mail_idx}
+              order by mail_sender.mail_idx
+   </select>
+   
+   <select id="deleteListSelectMail" parameterType="int" resultType="mail">
+      select 
+          mail_delete.mail_idx,
+          mail_delete.mail_title,
+         (select
+              listagg(mail_filepath, ',')
+                  from mail_delete_file    
+              where
+                  mail_delete_file.mail_id = mail_delete.mail_idx)as mail_filepath
+              from mail_delete
+              where mail_delete.mail_idx = #{mail_idx}
+              order by mail_delete.mail_idx
+   </select>
+ 
+ 
+
+</mapper>

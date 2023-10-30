@@ -1,0 +1,133 @@
+@charset "utf-8";
+
+
+
+/*---- (approval) update.jsp ----*/
+#ApproveRoot_select {
+	position: absolute;
+	top: 25%;
+	left: 30%;
+	width: 650px;
+}
+
+#ApproveRoot_select>.approveUpTop {
+	display: flex;
+}
+
+.approveUpRequestName {
+	font-size: 30px;
+	text-align: center;
+	width: 450px;
+	padding-top: 30px;
+	height: 70px;
+}
+
+.approveUpTop>.approveUpResultImg>img {
+	position: absolute;
+	width: 200px;
+	height: 100px;
+}
+
+#approveUpTable {
+	border: 1px solid black;
+	border-collapse: collapse;
+	width: 650px;
+	margin-top: 40px;
+}
+
+#approveUpTable>th, td {
+	border: 1px solid black;
+	text-align: center;
+	font-size: 20px;
+	padding: 10px 8px;
+}
+
+.approveUpValue {
+	text-align: left;
+}
+
+#approveUpDownBtn {
+	cursor: pointer;
+	margin-left: 10px;
+}
+.approveUpSa {
+	height: 300px;
+}
+
+.approveUpValueSa>div {
+	text-align: left;
+	margin-top: -135px;
+	height: auto;
+	white-space: pre;
+}
+
+#approveUpCheckbox {
+	border: 1px solid black;
+	border-top: none;
+	padding-top: 80px;
+	padding-bottom: 20px;
+	padding-left: 450px;
+}
+
+#approveUpCheckbox>input[type="submit"] {
+	margin-left: 20px;
+}
+
+/*---- selectOne.jsp ----*/
+#ApprovSO_root_select {
+	position: absolute;
+	top: 25%;
+	left: 30%;
+	width: 650px;
+}
+
+#ApprovSO_root_select>.ApprovSO_top {
+	display: flex;
+}
+
+.ApprovSO_requestName {
+	font-size: 30px;
+	text-align: center;
+	width: 450px;
+	padding-top: 30px;
+	height: 70px;
+}
+
+.ApprovSO_top>.resultImg>img {
+	position: absolute;
+	width: 200px;
+	height: 100px;
+}
+
+#approveSoTable {
+	border: 1px solid black;
+	border-collapse: collapse;
+	width: 650px;
+	margin-top: 40px;
+}
+
+#approveSoTable>th, td {
+	border: 1px solid black;
+	text-align: center;
+	font-size: 20px;
+	padding: 10px 8px;
+}
+
+.approveSoValue {
+	text-align: left;
+}
+
+#approveSoDownBtn {
+	margin-left: 5px;
+	color: 
+}
+
+.approveSoSa {
+	height: 300px;
+}
+
+.approveSosaValue>div {
+	text-align: left;
+	margin-top: -135px;
+	height: auto;
+}

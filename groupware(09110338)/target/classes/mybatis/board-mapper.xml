@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+   "-//mybatis.org//DTD Mapper 3.0//EN"
+   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!--  namespace : DAO 인터페이스의 풀네임. 패키지부터 인터페이스 이름까지 모두 작성한다 -->
+<mapper namespace="com.team.repository.BoardDAO">
+
+   <select id="selectAll" resultType="board" parameterType="paging">
+      select B.*, S.sender, S.receiver, S.board_id, E.employee_name from board B
+         left join sendreceiver S
+         on B.board_idx = S.board_id
+         left join employees E
+         on B.writer_id = E.employee_idx 
+         <if test='bd_column != null and bd_column != "" and bd_search != null and bd_search != ""' >
+            where ${bd_column} like '%${bd_search}%'
+         </if>
+         order by board_idx desc
+         offset #{offset} rows
+         fetch next #{perPage} rows only
+   </select>
+   <select id="selectCount" parameterType="paging" resultType="int">
+      select count(*) from board B
+      	left join employees E
+      	on B.writer_id = E.employee_idx
+         <if test='bd_column != null and bd_column != "" and bd_search != null and bd_search != ""' >
+            where ${bd_column} like '%${bd_search}%'
+         </if>
+   </select>
+   <select id="selectOne" parameterType="int" resultType="board">
+      select B.*, E.employee_name, E.department from board B
+      inner join employees E
+      on B.writer_id = E.employee_idx
+         where board_idx = #{board_id}
+   </select>
+   
+   <!-- ================= Notice (공지사항) ======================= -->
+   
+   <select id="selectNotice" resultType="board" parameterType="paging">
+      select B.*, E.employee_name from board B
+         left join employees E
+         on B.writer_id = E.employee_idx
+         where B.board_category = '공지사항'
+         <if   test='bd_column != null and bd_column != "" and bd_search != null and bd_search != ""'>
+            and ${bd_column} like '%${bd_search}%'
+         </if>
+         order by B.board_idx desc
+         offset #{offset} rows
+         fetch next #{perPage} rows only
+   </select>
+   <select id="noticeCount" resultType="int">
+      select count(*) from board 
+         where board_category = '공지사항'
+   </select>
+   <select id="noticeSearchCount" resultType="int" parameterType="paging">
+      select count(*) from board B
+      left join employees E
+      on B.writer_id = E.employee_idx
+            where B.board_category = '공지사항'
+         <if test='bd_search != null and bd_search != ""' >
+            and ${bd_column} like '%${bd_search}%'
+         </if>   
+   </select>
+   <select id="homeNotice" resultType="board">
+        select B.*, E.employee_name from board B
+        inner join employees E
+        on B.writer_id = employee_idx
+           where B.board_category = '공지사항'
+           order by B.board_idx desc
+           offset 0 rows
+           fetch next 3 rows only
+   </select>
+   <delete id="noticedelete" parameterType="int">
+       delete board
+       where board_idx = #{board_idx}
+   </delete>
+   <!-- ================= Suggestion (건의사항) ======================= -->   
+   
+   <select id="selectSuggestion" resultType="board" parameterType="paging">
+      select B.*, S.*, E.employee_name from board B
+         left join sendreceiver S
+         on B.board_idx = S.board_id
+         left join employees E
+         on B.writer_id = E.employee_idx    
+         where B.board_category = '건의사항'
+         <if test='bd_column != null and bd_column != "" and bd_search != null and bd_search != ""'>
+            and ${bd_column} like '%${bd_search}%'
+         </if>
+         order by B.board_idx desc
+         offset #{offset} rows
+         fetch next #{perPage} rows only
+   </select>
+   <select id="suggestionCount" resultType="int">
+      select count(*) from board
+         where board_category = '건의사항' 
+   </select>
+   <select id="suggestionSearchCount" resultType="int" parameterType="paging">
+      select count(*) from board B
+      inner join employees E
+      on B.writer_id = E.employee_idx
+            where B.board_category = '건의사항'
+         <if test='bd_search != null and bd_search != ""' >
+            and ${bd_column} like '%${bd_search}%'
+         </if>   
+   </select>
+   <select id="selectHumanList" resultType="employees">
+      select * from employees
+   </select>
+   <select id="homeSuggestion" resultType="board">
+        select B.*, E.employee_name from board B
+        inner join employees E
+        on B.writer_id = employee_idx
+           where B.board_category = '건의사항' and B.isnotice = 0
+           order by B.board_idx desc
+           offset 0 rows
+           fetch next 3 rows only           
+   </select>
+   <delete id="suggestiondelete" parameterType="int">
+       delete board
+       where board_idx = #{board_idx}
+   </delete>
+   <!-- ================= Club (동호회) ======================= -->
+   
+   <select id="selectClub" resultType="board" parameterType="paging">
+      select C.*, E.employee_name from board_club C
+         left join employees E
+         on C.writer_id = E.employee_idx
+         <if   test='bd_column != null and bd_column != "" and bd_search != null and bd_search != ""'>
+         where ${bd_column} like '%${bd_search}%'
+         </if>
+         order by C.club_idx desc
+         offset #{offset} rows
+         fetch next #{perPage} rows only
+   </select>
+   <select id="clubSearchCount" resultType="int" parameterType="paging">
+      select count(*) from board_club C
+      left join employees E
+      on C.writer_id = E.employee_idx
+         <if   test='bd_column != null and bd_column != "" and bd_search != null and bd_search != ""'>
+          where ${bd_column} like '%${bd_search}%'
+         </if>   
+   </select>
+   <select id="selectOneClub" parameterType="int" resultType="board">
+      select C.*, E.employee_name, E.department from board_club C
+      inner join employees E
+      on C.writer_id = E.employee_idx
+         where C.club_idx = #{board_idx}
+   </select>
+   <insert id="clubInsert" parameterType="board">
+   		insert into board_club (board_title, board_content, club_name, writer_id) values
+   		 (#{board_title}, #{board_content}, #{board_category}, ${employee_idx})
+   </insert>
+   <update id="clubUpdate" parameterType="board">
+   		update board_club
+   		set
+   		board_content = #{board_content}
+   		where club_idx = #{club_idx}
+   </update>
+   <delete id="clubDelete" parameterType="int">
+   		delete board_club
+   		where club_idx = #{club_idx}
+   </delete>
+   <!-- ================= Event (경조사) ======================= -->
+   <select id="eventSearchCount" resultType="int" parameterType="paging">
+      select count(*) from board B
+      left join employees E
+      on B.writer_id = E.employee_idx
+            where B.board_category = '경조사'
+         <if test='bd_search != null and bd_search != ""' >
+            and ${bd_column} like '%${bd_search}%'
+         </if>   
+   </select>
+   <select id="selectEvent" parameterType="paging" resultType="board" >
+      select B.*, E.employee_name from board B
+         left join employees E
+         on B.writer_id = E.employee_idx 
+         where B.board_category = '경조사'
+         <if test='bd_column != null and bd_column != "" and bd_search != null and bd_search != ""'>
+            and ${bd_column} like '%${bd_search}%'
+         </if>
+         order by B.board_idx desc
+         offset #{offset} rows
+         fetch next #{perPage} rows only
+   </select>
+   <select id="selectReply" parameterType= "int" resultType="reply">
+      select B.board_idx, E.employee_idx, E.employee_name, E.profile_fic, R.* from reply R
+         inner join board B
+         on R.board_id = B.board_idx
+         inner join employees E
+         on R.writer_id = E.employee_idx
+         where B.board_idx = #{board_id}
+         order by R.reply_idx asc
+   </select>
+   <insert id="insertReply" parameterType="reply">
+      insert into reply (writer_id, board_id, reply_content) values
+         (#{writer_id}, #{board_id}, #{reply_content})
+   </insert>
+   <select id="selectAddress" parameterType="int" resultType="board">
+      select * from board B
+         inner join address A
+         on B.board_idx = A.board_id
+         where B.board_idx = #{board_idx}
+   </select>
+   <delete id="deleteAddress" parameterType="int">
+   	   delete from Address
+   	   where board_id = #{board_idx}
+   </delete>
+   <select id="eventCount" resultType="int">
+      select count(*) from board
+         where board_category = '경조사'
+   </select>
+   
+   <select id="selectSendReceiver" parameterType="int" resultType="receiver">
+      select * from sendReceiver
+         where sender = ${sender}
+   </select>
+   
+   <select id="homeEvent" resultType="board">
+        select B.*, E.employee_name from board B
+        inner join employees E
+        on B.writer_id = employee_idx
+           where B.board_category = '경조사'
+           order by B.board_idx desc
+           offset 0 rows
+           fetch next 8 rows only
+   </select>
+   <delete id="eventdelete" parameterType="int">
+   		 delete board
+       where board_idx = #{board_idx}
+   </delete>
+</mapper>

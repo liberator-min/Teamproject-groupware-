@@ -1,0 +1,321 @@
+@charset "utf-8";
+
+@font-face {
+   font-family: 'Pretendard-Regular';
+   src:
+      url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
+      format('woff');
+   font-weight: 400;
+   font-style: normal;
+}
+
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+.notosanskr * {
+   font-family: 'Noto Sans KR', sans-serif;
+}
+
+* {
+   font-family: 'Pretendard-Regular';
+}
+/*calendar*/
+.fc-toolbar-chunk {
+   display: flex;
+}
+
+#calendar {
+   width: 71vw;
+    height: 80vh;
+    margin: 0 auto;
+    margin-top: 30px; 
+ }
+.scheduleTopBox {
+    display: flex;
+    width: 60vw;
+    margin: 0 60px;
+    margin-top: 20px;
+}
+
+.scheduleTopBox {
+   display: flex;
+   width: 60vw;
+   margin: 0 160px;
+   margin-top: 20px;
+}
+/* 일요일 날짜 빨간색 */
+.fc-day-sun a {
+  color : lightcoral;
+  text-decoration: none;
+}
+
+/* 토요일 날짜 파란색 */
+.fc-day-sat a {
+  color : skyblue;
+  text-decoration: none;
+}
+.fc, .fc-media-screen, .fc-direction-ltr, .fc-theme-standard{
+         width: 100%;
+         height: 95%;
+         margin-top: 15px;
+}
+/*list btn*/
+.schedule_insert_btn {
+   margin-right: 50px;
+   border: 1px solid #F1F1F1;	
+   border-radius: 20px;
+   padding: 10px 15px;
+   background-color: #F1F1F1;
+   font-weight: bold;
+   transition: 0.5s;
+}
+
+.schedule_insert_btn:hover {
+   color: white;
+   background-color: black;
+   transition: 0.5s;
+}
+.my_group_schedule_btn{
+   margin-left: 200px;
+   margin-right: 50px;
+   border: 1px solid #F1F1F1;
+   border-radius: 20px;
+   padding: 10px 15px;
+   background-color: #F1F1F1;
+   font-weight: bold;
+   transition: 0.5s;
+}
+.my_group_schedule_btn:hover {
+   color: white;
+   background-color: black;
+   transition: 0.5s;
+}
+.schedule_Group_insert_btn{
+	margin-left: 200px;
+	margin-right: 50px;
+   border: 1px solid #F1F1F1;
+   border-radius: 20px;
+   padding: 10px 15px;
+   background-color: #F1F1F1;
+   font-weight: bold;
+   transition: 0.5s;
+}
+.schedule_Group_insert_btn:hover {
+   color: white;
+   background-color: black;
+   transition: 0.5s;
+}
+
+.ScheduleToBtn {
+   padding: 10px;
+   font-weight: 600;
+}
+
+.ScheduleToBtn > a {
+   text-decoration: none;
+   color: white;
+   border: 1px solid #BFBFBF;
+   padding: 10px 15px;
+   border-radius: 20px;
+   background-color: #BFBFBF;
+}
+
+
+/* insert.jsp */
+#schedule_insert_box {
+	width: 71vw;
+	height: 60vh;
+	padding: 20px 0;
+	margin: 0 auto;
+}
+#schedule_insert_box >  #schedule_insert_box_wrap{
+	margin: auto auto;
+}
+#schedule_insert_box > #schedule_insert_box_wrap > div {
+	margin-bottom: 15px;
+}
+.schedule_insert_content_input {
+	width: 30vw;
+	height: 30vh;
+}
+#schedule_insert_box > #schedule_send {
+	margin-left: 680px;
+	margin-top: 50px;
+}
+
+
+.modal_content {
+	width: 300px;
+    text-align: left;
+    border: 0;
+}
+
+input[type="text"],
+input[type="date"],
+select,
+textarea {
+    width: 100%;
+    padding: 5px;
+    border: none;
+    background-color: #f0f0f0;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+
+/* 버튼 스타일 */
+#schedule_send {
+	all:unset;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out;
+    width: 100px;
+    text-align: center;
+}
+
+#schedule_send:hover {
+    background-color: #000;
+    color: #fff;
+}
+#schedule_update{
+  	all:unset;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out;
+    width: 100px;
+    text-align: center;
+}
+#schedule_update:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.schedule_update_wrap {
+	display: flex;
+	justify-content: center;
+}
+
+/* 스케줄 내용 입력란 스타일 */
+.schedule_insert_content_input {
+    width: 100%;
+    padding: 5px;
+    border: none;
+    background-color: #f0f0f0;
+    border-radius: 3px;
+    resize: none;
+}
+
+.schedule_send_wrap {
+	display: flex;
+	justify-content: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* selectone.jsp */
+#schSelectBox {
+	margin: auto;
+	width: 100%;
+	height: 100%;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+#schSelectBox > button {
+	margin: 30px 0;
+	margin-right: 20px;
+}
+#schSelectOnT {   
+	text-align: center;
+	margin: auto;
+	width: inherit;
+	height: 50%; 
+	border-collapse: collapse;
+}
+#schSelectOnT > th,td {   
+	border: 0;
+	padding: 10px;
+}
+.fc-event-title-fc-sticky {
+	background-color: #FFC0D5;
+}
+
+.schedule_Group_insert_btn {
+    margin-right: 50px;
+    border: 1px solid #F1F1F1;
+    border-radius: 20px;
+    padding: 10px 15px;
+    background-color: #F1F1F1;
+    font-weight: bold;
+    transition:0.5s;
+ }
+  
+.schedule_Group_insert_btn:hover {
+    color: white;
+    background-color: black;
+    transition: 0.5s;
+}
+ 
+.btn ,#delete{
+      background-color: #f0f0f0;
+    color: black;
+    margin: 0 5px;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-box {
+    margin-top: 50px;
+    display: flex;
+    justify-content: right;
+}
+  
+ .btn:hover ,
+#delete:hover {
+    background-color: black;
+    color: white;
+}
+/* selectAllOne.jsp*/
+.selectAllOne-box{
+   background-color: #f8f8f8;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.selectAllOne-table {
+   text-align: center;
+   margin: auto;
+   width: inherit;
+   height: 50%; 
+   border-collapse: collapse;
+}
+
+.selectAllOne-table > tr  {
+   margin: 10px auto;
+}

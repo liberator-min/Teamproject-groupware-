@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.team.repository.ScheduleDAO">
+
+<select id="selectAll" parameterType="string" resultType="schedule">
+<!-- SELECT create_date
+     , TO_DATE(SUBSTR(create_date, 1, 19), 'yyyy-mm-dd hh24:mi:ss') dt
+     , TO_TIMESTAMP(create_date, 'yyyy-mm-dd hh24:mi:ss.ff3') ts
+  FROM (SELECT '2016-05-13 17:50:42.562' create_date FROM dual) -->
+	<!-- select * FROM schedule
+    WHERE TO_CHAR(start_date, 'MM/YYYY') = TO_CHAR(#{date}, 'MM/YYYY') -->
+   	select * from schedule where department = #{department}
+    
+</select>
+
+<select id="select" parameterType="string" resultType="schedule">
+	select * from schedule where department = #{name}
+</select>
+
+<select id="selectOne" parameterType="int" resultType="schedule">
+	select * from schedule where schedule_idx = #{idx}
+</select>
+<insert id="insert" parameterType="schedule">
+	 insert into schedule 
+    (start_date, end_date ,  department,  writer, type, title , content )
+    values( #{start_date},#{end_date},#{department},#{writer},#{type},#{title},#{content})
+</insert>
+
+<update id="update" parameterType="schedule">
+update schedule set
+	start_date = #{start_date},
+    end_date = #{end_date},
+    department = #{department},
+    writer = #{writer},
+    type = #{type},
+    title = #{title},
+    content = #{content}
+    where schedule_idx = #{schedule_idx}
+</update>
+
+<delete id="delete" parameterType="int">
+	delete schedule where schedule_idx = #{idx}
+</delete>
+	
+</mapper>

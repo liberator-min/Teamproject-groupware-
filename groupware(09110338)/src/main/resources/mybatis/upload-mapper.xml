@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org/DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.team.repository.FileUploadDAO">
+   
+   <insert id="insertNotice" parameterType="upload">
+      insert into board (board_title, board_content, board_category, writer_id) values (#{board_title}, #{board_content}, #{board_category}, ${employee_idx})
+   </insert>
+   
+   <select id="fileDelete" parameterType="int" resultType="string">
+   	 select listagg(board_filepath, ',') as board_filepath
+   	 	from board_file
+   	 	where board_id = #{board_idx}
+   	 			
+   </select>
+   <insert id="insertSuggetion" parameterType="upload">
+      insert into board (board_title, board_content, board_category, writer_id, isnotice) values (#{board_title}, #{board_content}, #{board_category}, #{employee_idx}, #{isnotice})
+   </insert>
+   
+   <insert id="insertEvent" parameterType="upload">
+     insert all
+         into board (board_title, board_content, board_category, writer_id) values (#{board_title}, #{board_content}, #{board_category}, ${employee_idx})
+         into address (address_value, placeName, board_id) values (#{address_value},#{placeName},board_seq.nextval)
+         select * from dual
+   </insert>
+   
+   <select id="MaxIdxFromUpload" resultType="int">
+      select max(board_idx) from board
+   </select>
+
+   
+   <insert id="insertFile" parameterType="hashmap">
+      insert into board_file (board_id, board_filePath)
+      <foreach item="item" collection="list" separator=" UNION ALL ">
+         select #{upload}, #{item} from dual 
+      </foreach>
+   </insert>
+  
+   
+   <select id="select" parameterType="int" resultType="upload">
+      select 
+          board.board_idx,
+          board.board_title,
+          (select
+              listagg(board_filePath, ',')
+                  from board_file    
+              where
+                  board_file.board_id = board.board_idx) as board_filepath
+              from board
+              where board.board_idx = #{board_idx}
+              order by board.board_idx
+   </select>
+   <update id="update" parameterType="upload">
+         update board
+         set
+         board_content = #{board_content}
+         where board_idx = #{board_idx}
+   </update>
+  <update id="updateFile" parameterType="hashmap">
+          update board_file
+          set
+          <foreach collection="list" item="item" separator="UNION ALL">
+              board_filePath = #{item}
+           </foreach>
+          where board_id = #{bdidx}
+   </update>
+   <update id="updateAddress" parameterType="upload">
+      update address
+      set
+      address_value = #{address_value},
+      placename = #{placeName}
+      where board_id = #{board_idx}
+   </update>
+   <delete id="deleteEventFile" parameterType="int">
+      delete board_file
+      where board_id = #{board_idx}
+   </delete>
+   <delete id="delete" parameterType="int">
+      delete board_file
+      where board_id = #{board_idx}
+   </delete>
+   
+   <!-- mail -->
+   
+   	<insert id="insertMail" parameterType="mail">
+		insert into mail(mail_title,mail_content,mail_writer,mail_receiver)
+		values ( #{mail_title},#{mail_content},#{mail_writer},#{mail_receiver})
+		
+	</insert>
+	
+	   <select id="MaxIdxFromMailUpload" resultType="int">
+      select max(mail_idx) from mail
+   </select>
+	 <insert id="insertMailFile" parameterType="hashmap">
+   	insert into mail_file (mail_id,mail_filepath)
+   		<foreach item="item" collection="list" separator=" UNION ALL ">
+         select #{mailupload}, #{item} from dual 
+      </foreach>
+   </insert>
+   <select id="receiveListSelectMail" parameterType="int" resultType="mail">
+      select 
+          mail.mail_idx,
+          mail.mail_title,
+         (select
+              listagg(mail_filepath, ',')
+                  from mail_file    
+              where
+                  mail_file.mail_id = mail.mail_idx) as mail_filepath
+              from mail
+              where mail.mail_idx = #{mail_idx}
+              order by mail.mail_idx
+   </select>
+   
+   <!-- sendermail -->
+	<insert id="insertSenderMail" parameterType="mail">
+		insert into mail_sender (mail_title,mail_content,mail_writer,mail_receiver)
+		values ( #{mail_title},#{mail_content},#{mail_writer},#{mail_receiver})
+		
+	</insert>
+	
+	   <select id="MaxIdxFromMailSenderUpload" resultType="int">
+      select max(mail_idx) from mail_sender
+   </select>
+	 <insert id="insertMailSenderFile" parameterType="hashmap">
+   	insert into mail_sender_file (mail_id,mail_filepath)
+   		<foreach item="item" collection="list" separator=" UNION ALL ">
+         select #{mailupload}, #{item} from dual 
+      </foreach>
+   </insert>
+  <select id="sendListSelectMail" parameterType="int" resultType="mail">
+      select 
+          mail_sender.mail_idx,
+          mail_sender.mail_title,
+         (select
+              listagg(mail_filepath, ',')
+                  from mail_sender_file    
+              where
+                  mail_sender_file.mail_id = mail_sender.mail_idx)as mail_filepath
+              from mail_sender
+              where mail_sender.mail_idx = #{mail_idx}
+              order by mail_sender.mail_idx
+   </select>
+   
+   <select id="deleteListSelectMail" parameterType="int" resultType="mail">
+      select 
+          mail_delete.mail_idx,
+          mail_delete.mail_title,
+         (select
+              listagg(mail_filepath, ',')
+                  from mail_delete_file    
+              where
+                  mail_delete_file.mail_id = mail_delete.mail_idx)as mail_filepath
+              from mail_delete
+              where mail_delete.mail_idx = #{mail_idx}
+              order by mail_delete.mail_idx
+   </select>
+ 
+ 
+<!--    <select id="selectFileList" parameterType="int" resultType="string"> -->
+<!--       select -->
+<!--          filePath -->
+<!--             from upload2_file -->
+<!--          where -->
+<!--             upload2 = #{idx} -->
+<!--    </select> -->
+   
+<!--    <delete id="deleteFile" parameterType="int"> -->
+<!--       delete upload2_file where upload2 = #{idx} -->
+<!--    </delete> -->
+   
+<!--    <delete id="delete" parameterType="int"> -->
+<!--       delete upload2 where idx = #{idx} -->
+<!--    </delete> -->
+</mapper>

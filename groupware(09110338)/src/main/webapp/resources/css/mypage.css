@@ -1,0 +1,177 @@
+@charset "utf-8";
+
+/*---- mypage.jsp -----*/
+#memberupdate {
+	margin-top: 100px;
+	margin-left: 140px;
+}
+
+#memberupdate>.memberupdate_Top {
+	display: flex;
+}
+
+#memberupdate>.memberupdate_wrap {
+	margin-left: 1%;
+	margin: 0 1.4%;
+	display: flex;
+}
+
+#memberupdate>.memberupdate_Top {
+	margin-left: -120px;
+}
+
+#memberupdate>.memberupdate_Top>.mbr_update {
+	margin: 0 180px;
+	margin-right: 220px;
+}
+
+#memberupdate>.memberupdate_Top>.topRight {
+	margin-left: 120px;
+}
+
+#memberupdate>.memberupdate_wrap>.memberupdate_image>.mbr_update_Img>.mbr_update_Img_content
+	{
+	text-align: center;
+}
+
+#memberupdate>.memberupdate_wrap>.memberupdate_image>.mbr_update_Img>.mbr_update_Img_content>.detail_Img
+	{
+	border-radius: 100%;
+	object-fit: cover;
+	border: 1px solid #eee;
+	margin: 25px 0;
+}
+
+#memberupdate>.memberupdate_wrap>.memberupdate_image>.mbr_update_Img>.mbr_update_Img_content>.detail_Img:hover
+	{
+	cursor: pointer;
+	opacity: 0.5;
+}
+
+#memberupdate>.memberupdate_wrap>.memberupdate_image>.mbr_update_Img>.mbr_update_Img_content>#add_A_Photo:hover
+	{
+	cursor: pointer;
+}
+
+#memberupdate>.memberupdate_wrap>.mbrupdate_content {
+	display: flex;
+	margin-right: 80px;
+}
+
+#memberupdate>.memberupdate_wrap>.mbrupdate_content>.mbrupdate_title {
+	margin-top: 24px;
+	margin-left: 200px;
+	margin-right: 10px;
+}
+
+#memberupdate>.memberupdate_wrap>.mbrupdate_content>.mbrupdate_title>.mbrupdate_item
+	{
+	margin-bottom: 46px;
+}
+
+#memberupdate>.memberupdate_wrap>.mbrupdate_content>.mbrupdate_detail {
+	margin-right: auto;
+}
+
+#memberupdate>.memberupdate_wrap>.mbrupdate_content>.mbrupdate_form>.mbrupdate_item>.mbrupdate_input
+	{
+	width: 160%;
+	height: 3em;
+	margin: 6% 0;
+	border-radius: 10px;
+	border: 2px solid #C1BFCD;
+}
+
+#memberupdate>.memberupdate_wrap>.mbrupdate_content>.mbrupdate_form>.mbrupdate_item>.mbrupdate_category
+	{
+	width: 160%;
+	height: 3em;
+	margin: 6% 0;
+	border-radius: 4px;
+	border: 2px solid #C1BFCD;
+}
+
+#memberupdate>.memberupdate_wrap>.mbrupdate_content>.mbrupdate_form>.mbrupdate_item>.mbrupdate_submit
+	{
+	background-color: #3E64FF;
+	color: white;
+	border: none;
+	margin-top: 26px;
+	font-weight: bold;
+}
+
+#memberupdate>.memberupdate_wrap>.mbrupdate_content>.mbrupdate_form>.mbrupdate_item>.mbrupdate_submit:hover
+	{
+	cursor: pointer;
+	background-color: rgba(246, 246, 246, 0.5);
+	color: #3E64FF;
+	opacity: 90%;
+}
+
+#userProfile_Img_Modal>#modal-userProfile_Img>#overlay-mypage {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+#userProfile_Img_Modal>#modal-userProfile_Img>#modal-content-mypage {
+	height: 564px;
+	width: 400px;
+	border-radius: 10px;
+	box-sizing: border-box;
+	background-color: white;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 5;
+}
+
+#modal-content-mypage>.mypagemodal-item>.isapprove>img {
+	width: 280px;
+}
+
+#userProfile_Img_Modal>.hidden {
+	display: none;
+}
+
+#updateProfileImgForm {
+	text-align: center;
+}
+
+#updateProfileImgForm>.item {
+	margin-top: 80px;
+}
+
+#updateProfileImgForm>.item>.title>img {
+	border-radius: 100%;
+	width: 288px;
+	height: 288px;
+	object-fit: cover;
+	border: 1px solid #eee;
+}
+
+#updateProfileImgForm>.item>.content {
+	margin: 32px 0;
+}
+
+#updateProfileImgForm>.item>.content>label {
+	font-size: 16px;
+	border: 1px solid #eee;
+	border-radius: 2px;
+	padding: 8px 100px;
+	color: #174EA6;
+}
+
+#updateProfileImgForm>.item>.content>label:hover {
+	background-color: #f9f9f9;
+	cursor: pointer;
+}
+
+#updateProfileImgForm>.item>.submit {
+	width: 100px;
+	height: 35px;
+}

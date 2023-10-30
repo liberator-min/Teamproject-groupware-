@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+   "-//mybatis.org//DTD Mapper 3.0//EN"
+   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team.repository.ApprovalDAO">
+
+   <select id="selectReceiver" resultType="approval" parameterType="string">
+      select a.*, e.employee_name, e.department as w_department, j.job_name
+         from approval a
+            join employees e on e.employee_userid = a.receiver
+            join job j on j.job_idx = e.job_id
+      where writer = #{userid} order by approval_idx desc
+   </select>
+   
+   <select id="writer" resultType="employees" parameterType="string">
+      select e.*, j.job_name
+         from employees e
+            join job j on e.job_id = j.job_idx
+         where e.employee_userid = #{userid}
+   </select>
+
+   <select id="selectBoss" resultType="employees" parameterType="string">
+      select employee_name, job_name, department, employee_userid
+          from employees e
+              join job j on job_idx = e.job_id
+          where e.job_id = 
+            (case 
+                when (select job_id from employees where employee_userid = #{userid}) = 5 then 6
+                when (select job_id from employees where employee_userid = #{userid}) in (1,2,3,4) then 5
+                else 0
+            end)
+         and
+           department = 
+            (case
+                when (select job_id from employees where employee_userid = #{userid}) = 5 then '경영부'
+                else (select department from employees where employee_userid = #{userid})
+            end)
+   </select>
+   
+   <select id="selectBosses" resultType="employees" parameterType="employees">
+      select e.employee_name, j.job_name, e.department, e.employee_userid
+          from employees e
+              join job j on job_idx = e.job_id
+          where e.job_id = 5
+   </select>
+   
+   <select id="selectOne" resultType="employees" parameterType="string">
+      select e.*, j.job_name 
+         from employees e
+             join job j on job_idx = job_id
+         where employee_userid=#{userid}
+   </select>
+   
+   <select id="selectWait" resultType="approval" parameterType="string">
+      select a.*, e.employee_name, j.job_name
+         from approval a
+            join employees e on e.employee_userid = a.writer
+            join job j on j.job_idx = e.job_id
+         where receiver = #{userid} and isapprove = 1
+   </select>
+   
+   <select id="selectAll" resultType="approval" parameterType="string">
+      select a.*, e.employee_name, j.job_name
+         from approval a
+            join employees e on e.employee_userid = a.writer
+            join job j on j.job_idx = e.job_id
+         where receiver = #{userid} or final_receiver = #{userid}
+         	order by approval_date 
+   </select>
+   
+   <select id="bossSelect" resultType="approval" parameterType="string">
+      select a.*, e.employee_name, j.job_name
+         from approval a
+            join employees e on e.employee_userid = a.writer
+            join job j on j.job_idx = e.job_id
+         where final_receiver= #{userid} and isapprove = 2
+   </select>
+   
+   <insert id="insertFile" parameterType="approval">
+      insert into approval 
+         (writer, receiver, start_date, end_date, department, type, approval_title, approval_content, approval_filepath)
+      values (#{writer}, #{receiver}, #{start_date}, 
+         #{end_date}, #{department}, #{type}, #{approval_title}, #{approval_content}, #{approval_filepath})
+   </insert>
+   
+   <insert id="insert" parameterType="approval">
+      insert into approval 
+         (writer, receiver, start_date, end_date, department, type, approval_title, approval_content)
+      values (#{writer}, #{receiver}, #{start_date}, 
+         #{end_date}, #{department}, #{type}, #{approval_title}, #{approval_content})
+   </insert>
+   
+   <select id="selectRoot" parameterType="int" resultType="approval">
+      select a.*, e.department as w_department, e.employee_name ,j.job_name
+         from approval a 
+            join employees e on e.employee_userid = a.writer
+            join job j on j.job_idx = e.job_id
+      where approval_idx = #{idx}
+   </select>
+   
+   <update id="update" parameterType="approval">
+      update approval set isapprove = #{isapprove} where approval_idx = #{approval_idx}
+   </update>
+</mapper>

@@ -1,0 +1,118 @@
+@charset "utf-8";
+
+/*---- (approval) standby_list.jsp -----*/
+#ApproveStWait_list {
+	width: 38vw;
+	position: absolute;
+	top: 30%;
+	left: 2%;
+	height: 550px;
+	overflow-y: scroll!import;
+	overflow-x: hidden;
+	border-radius: 10px;
+	padding: 10px;
+	padding-left: 15px;
+	padding-right: 5px;
+}
+
+#ApproveStWait_list>#approveSt_table {
+	border-collapse: collapse;
+	width: inherit;
+	margin: 0rem auto;
+	box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.1);
+	background: white;
+}
+
+#ApproveStWait_list>#approveSt_table>th, td {
+	padding: 8px;
+	border-bottom: 1px solid #ddd;
+	font-size: 15px;
+}
+
+#ApproveStWait_list>#approveSt_table>thead>tr>th {
+	background-color: #B2EBF4;
+	color: #353535;
+	padding: 8px;
+}
+
+#ApproveStWait_list>#approveSt_table>tbody>.wait-row:nth-child(n+1):hover
+	{
+	background-color: #F6F6F6;
+	opacity: 0.9;
+	cursor: pointer;
+}
+
+#ApproveStWait_list>#approveSt_table>tbody>tr>td>a {
+	text-decoration: none;
+	color: black;
+}
+
+#ApproveStWait_list::-webkit-scrollbar {
+	width: 8px;
+}
+
+#ApproveStWait_list::-webkit-scrollbar-thumb {
+	background: #353535;
+	border-radius: 10px;
+}
+
+#ApproveStWait_list::-webkit-scrollbar-track {
+	background: white;
+}
+
+#ApproveStAll_list {
+	width: 40vw;
+	position: absolute;
+	right: 2%;
+	top: 31%;
+	height: 550px;
+	border-left: thick solid gray;
+	padding-left: 45px;
+	margin-left: 10px;
+	overflow-y: scroll!import;
+	overflow-x: hidden;
+}
+
+#ApproveStAll_list>#approvalAll_table {
+	border-collapse: collapse;
+	width: inherit;
+	margin: 0 auto;
+	box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.1);
+	background: white;
+}
+
+#ApproveStAll_list>#approvalAll_table>th, td {
+	padding: 8px;
+	text-align: center;
+	border-bottom: 1px solid #ddd;
+}
+
+#ApproveStAll_list>#approvalAll_table>thead>tr>th {
+	background-color: #D5D5D5;
+	color: #353535;
+	padding: 8px;
+}
+
+#ApproveStAll_list>#approvalAll_table>tbody>.all-row:nth-child(n+1):hover
+	{
+	background-color: #F6F6F6;
+	opacity: 0.9;
+	cursor: pointer;
+}
+
+#ApproveStAll_list>#approvalAll_table>tbody>tr>td>a {
+	text-decoration: none;
+	color: black;
+}
+
+#ApproveStAll_list::-webkit-scrollbar {
+	width: 8px;
+}
+
+#ApproveStAll_list::-webkit-scrollbar-thumb {
+	background: #353535;
+	border-radius: 10px;
+}
+
+#ApproveStAll_list::-webkit-scrollbar-track {
+	background: white;

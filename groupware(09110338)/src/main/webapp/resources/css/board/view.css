@@ -1,0 +1,211 @@
+@charset "utf-8";
+
+.bd_viewcategory {
+	display: flex;
+	width: 80%;
+	justify-content: space-around;
+	margin: 0 auto;
+	margin-top: 10px;
+	margin-bottom: 10px; 
+}
+
+#bd_category>a {
+	color: #3F3F3F;
+	font-size: 22px;
+}
+
+#bd_category>a:hover {
+	color: #3E64FF;
+	font-weight: bold;
+}
+
+#bd_suggestionview {
+	width: 71vw;
+	height: 65vh;			/*60vh에서 65vh로 변경*/
+	border-radius: 20px;
+	overflow-x: hidden;
+	margin: 0 auto;
+	margin-top: 20px; /*추가*/
+/* 	margin-top: 30px; 주석 처리*/
+	background-color: white;
+	overflow-y: scroll;
+}
+#bd_clubview {
+	width: 71vw;
+	height: 60vh;			/*60vh에서 65vh로 변경*/
+	border-radius: 20px;
+	overflow-x: hidden;
+	margin: 0 auto;
+	margin-top: 20px; /*추가*/
+/* 	margin-top: 30px; 주석 처리*/
+	background-color: white;
+	overflow-y: scroll;
+}
+
+#bd_suggestionview::-webkit-scrollbar {
+	display: none;
+}
+#bd_clubview::-webkit-scrollbar {
+	display: none;
+}
+
+.bd_suggestionTitle {
+	background-color: #F4F4F4;
+	text-align: center;
+	padding: 17px 0;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+#bd_who {
+	display: flex;
+	justify-content: space-between;
+	padding: 5px 20px;
+	border-bottom: 1px solid #DFDFDF;
+}
+
+#bd_suggestionContent {
+	display: flex;
+}
+
+.bd_suggestionContent {
+	width: 47vw;
+	height: 42vh;
+	box-shadow: 2px 3px 3px -2px rgba(0, 0, 0, 0.1);
+	border: 0.5px solid #F3F3F3;
+	border-radius: 25px;
+	margin-top: 20px;
+	margin-left: 5px;
+	padding: 15px;
+	overflow-y: scroll;
+	white-space: pre;
+}
+
+.bd_suggestionContent::-webkit-scrollbar {
+	display: none;
+}
+
+#sg_img {
+	height: 45vh;
+	box-shadow: 2px 3px 3px -2px rgba(0, 0, 0, 0.1);
+	border: 0.5px solid #F3F3F3;
+	border-radius: 25px;
+	margin: 0 10px;
+	margin-top: 20px;
+	overflow: hidden;
+	white-space: nowrap;
+	width: 20vw;
+	justify-content: space-around;
+}
+
+/*----- noticeview -----*/
+#bd_noticeview {
+	display: flex;
+	margin: 0 auto;
+	justify-content: center;
+/* 	padding-top: 20px; 주석 처리*/
+}
+
+#bd_noticeLeft {
+	width: 30vw;
+	height: 60vh;
+	margin: 20px;
+	border-radius: 25px;
+	box-shadow: 1px 3px 3px 3px rgba(0,0,0,0.1);
+}
+
+#bd_noticeright {
+	width: 30vw;
+	height: 57vh;
+	margin: 20px;
+	border-radius: 25px;
+	padding: 15px;
+	font-size: 18px;
+	overflow-y: scroll;
+	white-space: pre;
+	background-color: white;
+	box-shadow: 1px 3px 3px 3px rgba(0,0,0,0.1);
+}
+#bd_noticeright::-webkit-scrollbar {
+	display: none;
+}
+.bd_ifram {
+	width: 30vw;
+	height: 60vh;
+	border: 1px solid grey;
+	border-radius: 25px;
+}
+.bd_UpdateBtn {
+	background-color: #CDCDCD;
+	width: 5.5vw;
+	margin-right: 35px;
+	border-radius: 30px;
+	text-align: center;
+	padding-top: 9px;
+	cursor: pointer;
+}
+.bd_UpdateBtn > a  {
+	color: white;
+	font-size: 15px;
+}
+.bd_viewBtn {
+	font-size: 15px;
+	background-color: #3E64FF;
+	border: 1px solid #3E64FF;
+	border-radius: 30px;
+	color: white;
+	padding: 10px 15px;
+	cursor: pointer;
+	height: 4vh;
+	line-height: 2vh;
+	margin: 0px;
+}
+.bd_FileBT {
+	background-color: #CDCDCD;
+	width: 5.5vw;
+	margin-right: 35px;
+	border-radius: 30px;
+	text-align: center;
+	cursor: pointer;
+	color: white;
+	font-size: 15px;
+	padding: 12px 5px;
+}
+#bd_clubContent {
+	height: 70%;
+	margin-top: 20px;
+	padding: 20px;
+	font-size: 18px;
+	white-space: pre;
+	overflow-y: scroll; 
+}
+#bd_clubContent::-webkit-scrollbar {
+	display: none;
+}
+#clubBOtBtn {
+	width: 71vw;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-around;
+	margin-top: 20px;
+}
+
+.bd_ClubUpdateBtn {
+	background-color: #CDCDCD;
+	width: 5.5vw;
+	height: 3vh;
+	margin-left: 950px;
+	border-radius: 30px;
+	text-align: center;
+	padding-top: 9px;
+	cursor: pointer;
+}
+.bd_ClubUpdateBtn > a  {
+	color: white;
+	font-size: 15px;
+}
+
+.ev_subtitle{
+	background-color: #F0F0F0;
+	border-radius: 25px;
+}

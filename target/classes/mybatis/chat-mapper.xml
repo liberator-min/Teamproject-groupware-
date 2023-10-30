@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+   "-//mybatis.org//DTD Mapper 3.0//EN"
+   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!--  namespace : DAO 인터페이스의 풀네임. 패키지부터 인터페이스 이름까지 모두 작성한다 -->
+<mapper namespace="com.team.repository.ChatDAO">
+   
+   <insert id="insertChat" parameterType="chat">
+      insert into chatting
+         (chatsender,chatreceiver,chatcontent)
+         values
+         (#{chatsender},#{chatreceiver},#{chatcontent})
+   </insert>
+   
+   <select id="getRoomChat" parameterType="string" resultType="chat">
+      select * from chatting
+         where roomName = #{roomName}
+         order by chatwritedate
+   </select>
+</mapper>

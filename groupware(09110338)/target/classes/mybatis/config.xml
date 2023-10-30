@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC 
+	"-//mybatis.org//DTD Config 3.0//EN" 
+	"https://mybatis.org/dtd/mybatis-3-config.dtd">
+	
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="false"/>
+		<setting name="useGeneratedKeys" value="false"/>
+		<setting name="mapUnderscoreToCamelCase" value="false"/>
+	</settings>
+		
+	<typeAliases>
+		<typeAlias type="com.team.model.EmployeesDTO" alias="employees"/>
+		<typeAlias type="com.team.model.ScheduleDTO" alias="schedule"/>
+		<typeAlias type="com.team.model.BoardDTO" alias="board"/>
+		<typeAlias type="com.team.model.BoardFileDTO" alias="upload"/>
+		<typeAlias type="com.team.model.SendReceiverDTO" alias="receiver"/>
+		<typeAlias type="com.team.model.ApprovalDTO" alias="approval"/>
+		<typeAlias type="com.team.model.DepartmentDTO" alias="department"/>
+		<typeAlias type="com.team.model.JobDTO" alias="job" />
+		<typeAlias type="com.team.model.MailDTO" alias="mail" />
+		<typeAlias type="com.team.model.PagingDTO" alias="paging" />
+		<typeAlias type="com.team.model.ReplyDTO" alias="reply" />
+		<typeAlias type="com.team.model.ChatDTO" alias="chat"/>
+		<typeAlias type="com.team.model.MailPagingDTO" alias="mailpaging" />
+	</typeAliases>
+</configuration>

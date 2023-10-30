@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+   "-//mybatis.org//DTD Mapper 3.0//EN"
+   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!--  namespace : DAO 인터페이스의 풀네임. 패키지부터 인터페이스 이름까지 모두 작성한다 -->
+<mapper namespace="com.team.repository.SendReceiverDAO">
+
+   <insert id="insertReceiver" parameterType="receiver">
+      insert into sendreceiver (sender, receiver) values
+      (#{sender}, #{employee_useridList})
+   </insert>
+   <select id="selectSendReceiver" resultType="receiver">
+      select S.*, B.isnotice from sendreceiver S
+         inner join board B
+         on B.board_idx = S.board_id
+         where board_id is not null
+         order by S.board_id desc
+   </select>
+   <delete id="deleteSendReceiver" parameterType="int">
+   	delete sendreceiver
+   	where board_id = #{board_idx}
+   </delete>
+</mapper>
+
+
+   
+
+   

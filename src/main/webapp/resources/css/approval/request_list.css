@@ -1,0 +1,192 @@
+@charset "utf-8";
+
+/*-------- (approval) request_list.jsp -------*/
+#approvalRs_list {
+	width: 1000px;
+	height: 450px;
+	position: absolute;
+	margin: 10px;
+	left: 19.5%;
+	top: 25%;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+#approvalRs_table {
+	border-collapse: collapse;
+	width: inherit;
+	margin: 0rem auto;
+	text-align: center;
+}
+
+#approvalRs_list::-webkit-scrollbar {
+	display: none;
+}
+#approvalRs_table>td {
+	padding: 10px;
+	border-bottom: 1px solid #ddd;
+	font-size: 15px;
+}
+
+#approvalRs_table>.ApproveRsTh, .ApproveRsTd {
+	border: none;
+	font-size: 15px;
+}
+#approvalRs_table>thead>tr>th {
+	background-color: white;
+	color: #353535;
+	padding: 10px;
+}
+
+#approvalRs_list>#approvalRs_table>tbody>.select-rowS:hover {
+	background-color: #d3d3d3;
+	opacity: 0.9;
+	cursor: pointer;
+}
+
+.select-row:hover {
+	background-color: #d3d3d3;
+	opacity: 0.9;
+	cursor: pointer;
+}
+
+#ApprovalRsOverlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(150, 150, 150, 0.74);
+}
+
+#ApprovalRsResult {
+	width: 730px;
+	height: 700px;
+	padding-top: 40px;
+	padding-right: 20px;
+	position: fixed;
+	top: 50%;
+	left: 55%;
+	transform: translate(-50%, -50%);
+	z-index: 5;
+	background-color: white;
+	border: 1px solid white;
+	border-radius: 30px;
+}
+
+#document_root {
+	position: absolute;
+	width: 650px;
+	left: 50px;
+}
+
+#document_root>.ApprovalRs_top {
+	display: flex;
+}
+#ApprovalRsModalTable {
+	border: 1px solid black;	
+}
+.ApprovalRs_Name {
+	font-size: 30px;
+	text-align: center;
+	width: 450px;
+	padding-top: 30px;
+	height: 70px;
+}
+
+.ApprovalRs_top>.resultImg>img {
+	position: absolute;
+	width: 200px;
+	height: 100px;
+}
+
+#document_root>table {
+	border: 1px solid black;
+	border-collapse: collapse;
+	width: 650px;
+	margin-top: 40px;
+}
+
+#document_root>th, td {
+	border: 1px solid black;
+	text-align: center;
+	font-size: 20px;
+	padding: 10px 8px;
+}
+
+.ApprovalRs_value {
+	text-align: left;
+}
+
+.ApprovalRs_sa {
+	height: 300px;
+}
+
+.sauuDiv {
+	font-size: 18px;
+	text-align: left;
+	margin-bottom: 280px;
+	white-space: pre;
+}
+
+/*------ (approval) selectOne.jsp ------*/
+#ApprovSO_root_select {
+	position: absolute;
+	top: 25%;
+	left: 30%;
+	width: 650px;
+}
+
+#ApprovSO_root_select>.ApprovSO_top {
+	display: flex;
+}
+
+.ApprovSO_requestName {
+	font-size: 30px;
+	text-align: center;
+	width: 450px;
+	padding-top: 30px;
+	height: 70px;
+}
+
+.ApprovSO_top>.resultImg>img {
+	position: absolute;
+	width: 200px;
+	height: 100px;
+}
+
+#approveSoTable {
+	border: 1px solid black;
+	border-collapse: collapse;
+	width: 650px;
+	margin-top: 40px;
+}
+
+approveSoTable>th, td {
+	border: 1px solid black;
+	text-align: center;
+	font-size: 20px;
+	padding: 10px 8px;
+}
+
+.approveSoValue {
+	text-align: left;
+}
+
+#approveSoDownBtn {
+	padding: 5px 10px;
+	border-radius: 5px;
+	border: 1px solid black;
+}
+
+.approveSoSa {
+	height: 300px;
+}
+
+.approveSosaValue>div {
+	text-align: left;
+	margin-top: -135px;
+	height: auto;
+	white-space: pre;
+}

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.team.repository.HomeDAO">
+
+	<select id="selectOne" parameterType="employees" resultType="employees">
+	select e.*, j.job_name 
+	    from employees e
+	        join job j on job_idx = e.job_id
+				where employee_userid = #{employee_userid} and employee_userpw = #{employee_userpw}
+	</select>
+	
+	<select id="selectTree" resultType="employees">
+		select j.*, e.* 
+		from employees e 
+		join job j on j.job_idx = e.job_id 
+		where not e.job_id = 7 or e.job_id = 6 
+		order by 
+		    case when j.job_idx = 6 then 0 else 1 end, 
+		    e.department desc, 
+		    j.job_idx desc
+	</select>
+
+
+	<select id="selectDepart" resultType="employees">
+		select e.*, j.job_name 
+			from employees e
+				join job j on job_idx = e.job_id
+			where e.department = #{department}
+	</select>
+
+
+	<select id="selectAllDepartment" resultType="department">
+		select * from department
+	</select>
+	
+	<select id="selectAllContact" parameterType="string" resultType="employees">
+        select e.*, j.job_name 
+        	from employees e 
+        	join job j on j.job_idx = e.job_id 
+        	where not trim(e.employee_userid) = 'root' 
+        	order by e.employee_idx
+	</select>
+	
+	<select id="selectOneEmployees" parameterType="int" resultType="employees">
+		select e.*, j.job_name from employees e 
+		join job j on j.job_idx = e.job_id
+		where e.employee_idx = #{employee_idx}
+	</select>
+	
+	<update id="updateEmployees" parameterType="employees">
+		update employees 
+			set
+				recovery_email 		= #{recovery_email},
+				phone_number 		= #{phone_number}, 
+				birth_date 			= #{birth_date} 
+			where employee_idx = #{employee_idx}
+	</update>
+	
+	<update id="resetPassword" parameterType="employees">
+		update employees
+			set
+				employee_userpw = #{employee_userpw},
+				salt = #{salt}
+			where
+				employee_userid = #{employee_userid}
+				and
+				recovery_email = #{recovery_email}
+	</update>
+	
+	<select id="select_Tree_dp" resultType="department">
+      select * from department where department_name not in ('경영부')
+   </select>
+   
+   <select id="chat_selectAll" parameterType="string" resultType="employees">
+	select e.*, j.job_name from employees e
+		join job j
+		on e.job_id = j.job_idx
+		<if test="search != ''">
+			where e.employee_name like '%' || #{search} || '%'
+		</if>
+		order by islogin desc , e.job_id desc
+	</select>
+	
+	<update id="updateLoginState" parameterType="employees">
+		update employees
+			set islogin = DECODE(islogin, 0, 1, 1, 0)
+			where employee_name = #{employee_name}
+	</update>
+	
+	<select id="homeApproval" parameterType="string" resultType="approval">
+		 select a.*, e.employee_name, e.department as w_department, j.job_name
+         from approval a
+            join employees e on e.employee_userid = a.receiver
+            join job j on j.job_idx = e.job_id
+      where writer = #{userid} order by approval_idx desc
+	</select>
+	
+	<select id="receiveMailNoReadCount" parameterType="mail">
+		select count(*) from mail
+		where mail_read = ${0} and mail_receiver= #{mail}
+	</select>
+	<select id="selectSalt" parameterType="employees" resultType="employees">
+		select salt from employees where employee_userid = #{employee_userid}
+	</select>
+	
+	<select id="selectProfileImg" parameterType="employees">
+		select profile_fic from employees where employee_idx = #{employee_idx}
+	</select>
+
+	<update id="updateProfileImg" parameterType="employees">
+		update employees set profile_fic = #{profile_fic} where employee_idx = #{employee_idx}
+	</update>
+	
+   <update id="updatePw" parameterType="employees">
+      update employees set salt = #{salt}, employee_userpw = #{employee_userpw} where employee_idx = #{employee_idx}
+   </update>
+</mapper>

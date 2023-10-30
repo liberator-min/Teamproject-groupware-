@@ -1,0 +1,153 @@
+@charset "utf-8";
+
+a {
+	text-decoration: none;
+}
+#bd_title {
+	padding-left: 20px;	
+	margin: 20px;
+}
+#bd_viewbody {
+	height: inherit;
+}
+.bd_viewcategory {
+	display: flex;
+	width: 80%;
+	justify-content: space-around;
+	margin: 0 auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+#bd_category > a {
+	color: #3F3F3F;
+	font-size: 22px;
+}
+#bd_category > a:hover {
+	color: #3E64FF;
+	font-weight: bold;
+}
+#bd_search > form {
+	display: flex;
+}
+
+#bd_search {
+	width: 71vw;
+	height: 7vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	z-index: 2;
+	margin: 0 auto;
+	margin-top: -10px;
+}
+
+#bd_select {
+	width: 7vw;
+	height: 4vh;
+	border-radius: 25px 0px 0px 25px;
+	text-align: center;
+	outline: none;
+}
+
+input[name="bd_search"] {
+	width: 55vw;
+	height: 3.65vh;
+	border: 0.5px solid grey;
+	text-align: center;
+	outline: none;
+}
+
+input[name="bd_submit"] {
+	width: 7vw;
+	height: 4vh;
+	border-radius: 0px 25px 25px 0px;
+	border: 0.5px solid grey;
+	text-align: center;
+}
+#bd_content {
+	width: 80%;
+	margin: 0 auto;
+	margin-top: 30px;
+/* 	margin-bottom: 10px; */
+	border-radius: 10px;
+}
+#contentTabTop {
+	display: flex;
+	width: inherit;
+	margin: 0 auto;
+	padding: 10px;
+	justify-content: center;
+}
+#bd_viewTable {
+	width: 100%;
+	font-size: 15px;
+	text-align: center;	
+	border-style: hidden;
+	table-layout: fixed;
+    border-spacing: 0;
+    background-color: white;
+}
+.bd_idx {
+	width: 2vw;
+}
+.bd_boardtitle {
+	width: 8vw;
+}
+.bd_writer {
+	width: 3vw;
+}
+.bd_date {
+	width: 5vw;
+}
+#bd_viewTable > thead > tr > th {
+	padding: 12px;
+	background-color: #F0F0F0;
+	color: black;
+}
+#bd_viewTable > tbody > tr > td {
+	padding: 13px 10px;
+	border-bottom: 1px solid #F0F0F0;
+}
+#bd_viewTable > tbody > tr > td:hover {
+	background-color: 
+}
+#bd_viewTable > tbody > tr > td > a {
+	color: #252525;
+}
+#bd_foot {
+	display: flex;
+	align-items: center;
+	margin: 0 auto;
+	z-index: 3;
+	position: inherit;
+	width: 71vw;
+	margin-top: -3px;
+}
+#bd_paging {
+	flex: 6;
+	margin: 3px;
+	text-align: center;
+}
+#bd_paging > a {
+	color: #3F3F3F;
+}
+
+#bd_write {
+	text-align: right;
+	margin-top: 40px;
+	padding: 5px 10px;
+}
+#bd_write > a {
+	border: none;
+	border-radius: 30px;
+	padding: 8px 12px;
+	background-color: #7C7C7C;
+	color: white;
+}
+#bd_write > a:hover {
+	background-color: rgba(124,124,124,0.1);
+	color: black;
+	font-weight: bold;
+}
+

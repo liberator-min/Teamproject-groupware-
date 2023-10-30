@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!--  namespace : DAO 인터페이스의 풀네임. 패키지부터 인터페이스 이름까지 모두 작성한다 -->
+<mapper namespace="com.team.repository.MailDAO">
+
+	<select id="selectAllRecieveList"  parameterType="mailpaging" resultType="mail">
+	select * from mail 
+          where mail_receiver = #{mail}
+         <if test="mail_search != null and mail_search != ''" >
+            and ${mail_column} like '%'||#{mail_search}||'%'
+         </if>
+        
+         order by mail_idx desc
+         offset #{offset} rows
+         fetch next #{perPage} rows only 
+	
+	</select>
+	
+	<select id="selectAllSenderList"  parameterType="string" resultType="mail">
+	select * from mail_sender 
+          where mail_writer = #{mail}
+         <if test="mail_search != null and mail_search != ''" >
+            and ${mail_column} like '%'||#{mail_search}||'%'
+         </if>
+        
+         order by mail_idx desc
+         offset #{offset} rows
+         fetch next #{perPage} rows only 
+	</select>
+	
+	<select id="selectAllDeleteList"  parameterType="string" resultType="mail">
+	select * from mail_delete 
+          where mail_receiver = #{mail}
+         <if test="mail_search != null and mail_search != ''" >
+            and ${mail_column} like '%'||#{mail_search}||'%'
+         </if>
+        
+         order by mail_idx desc
+         offset #{offset} rows
+         fetch next #{perPage} rows only 
+	</select>
+	
+	<select id="receiveMailNoReadCount" parameterType="mail">
+		select count(*) from mail
+		where mail_read = ${0} and mail_receiver= #{mail}
+	</select>
+	
+	<select id="deleteMailNoReadCount" parameterType="mail">
+		select count(*) from mail_delete
+		where mail_read = ${1} 
+	</select>
+	
+
+	
+	<select id="receivePageCount" parameterType="mailpaging">
+		select count(*) from mail
+         <if test="mail_column != null and mail_search != ''" >
+            where ${mail_column} like '%'||#{mail_search}||'%'
+         </if>
+	</select>
+	
+	<select id="senderPageCount" parameterType="mailpaging">
+		select count(*) from mail_sender
+         <if test="mail_column != null and mail_search != ''" >
+            where ${mail_column} like '%'||#{mail_search}||'%'
+         </if>
+	</select>
+	
+	<select id="deletePageCount" parameterType="mailpaging">
+		select count(*) from mail_delete
+         <if test="mail_column != null and mail_search != ''" >
+            where ${mail_column} like '%'||#{mail_search}||'%'
+         </if>
+	</select>
+	
+	<select id="selectAll" resultType="employees">
+		select * from employees
+	</select>
+	
+
+	<select id="receiveListSelectOne" parameterType="int" resultType="mail">
+	 select m.* , (select
+              listagg(mail_filepath, ',')
+                  from mail_file    
+              where
+                  mail_file.mail_id = m.mail_idx) as mail_filepath,e.employee_userid 
+	 from mail m
+     
+	 join employees e on e.mail = m.mail_receiver
+	 where m.mail_idx = #{idx} order by m.mail_idx desc
+	</select>
+	
+	
+	
+	<select id="sendListSelectOne" parameterType="int" resultType="mail">
+	select m.* , (select
+              listagg(mail_filepath, ',')
+                  from mail_sender_file    
+              where
+                  mail_sender_file.mail_id = m.mail_idx) as mail_filepath , e.employee_userid 
+	 from mail_sender m
+     
+	 join employees e on e.mail = m.mail_receiver
+	 where m.mail_idx = #{idx} order by m.mail_idx desc
+	</select>
+	
+	<select id="deleteListSelectOne" parameterType="int" resultType="mail">
+	select m.* , (select
+              listagg(mail_filepath, ',')
+                  from mail_delete_file    
+              where
+                  mail_delete_file.mail_id = m.mail_idx) as mail_filepath,e.employee_userid 
+	 from mail_delete m
+     
+	 join employees e on e.mail = m.mail_receiver
+	 where m.mail_idx = #{idx} order by m.mail_idx desc
+	</select>
+	
+	<delete id="mailDelete" parameterType="string">
+	delete mail where mail_idx = #{string}
+	</delete>
+	<delete id="mailFilePath" parameterType="string">
+	delete mail_file where mail_id = #{string}
+	</delete>
+	
+	<delete id="deleteMailFileDelete" parameterType="string">
+	delete mail_delete where mail_idx = #{string}
+	</delete>
+	<delete id="senderMailFileDelete" parameterType="string">
+	delete mail_sender where mail_idx = #{string}
+	</delete>
+	
+	<delete id="deleteMailFilePath" parameterType="string">
+	delete mail_delete_file where mail_id = #{string}
+	</delete>
+	
+	<delete id="senderMailFilePath" parameterType="string">
+	delete mail_sender_file where mail_id = #{string}
+	</delete>
+	
+	<select id="recievePageCount" parameterType="mailpaging">
+		select count(*) from mail
+         <if test="mail_column != null and mail_search != ''" >
+            where ${mail_column} like '%'||#{mail_search}||'%'
+         </if>
+	</select>
+	
+	<update id="read" parameterType="int">
+	update mail set mail_read = ${1}
+	where mail_idx = #{idx} 
+	</update>
+	
+</mapper>

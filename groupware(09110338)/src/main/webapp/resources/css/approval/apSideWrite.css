@@ -1,0 +1,48 @@
+@charset "utf-8";
+
+/*--------- (approval) approval_side.jsp -------*/
+#approval_category {
+	position: absolute;
+	width: 80%;
+	top: 10%;
+	left: 10%;
+	border-bottom: 1px solid gray;
+}
+
+#approval_category>.approval_ul {
+	display: flex;
+	list-style: none;
+	justify-content: space-around;
+}
+
+#approval_category>.approval_ul>li>a {
+	text-decoration: none;
+	font-size: 23px;
+	color: black;
+}
+
+/*----- (approval) write.jsp ----*/
+#approval_select {
+	position: absolute;
+	top: 33%;
+	left: 27%;
+	display: flex;
+}
+
+#approval_select>[id*="AppWrselect"] {
+	border: 1px solid #EAEAEA;
+	box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.1);
+	border-radius: 15px;
+	padding: 0 15px;
+	padding-bottom: 20px;
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+	margin: 0 30px;
+}
+
+#approval_select>[id*="AppWrselect"]>a>img {
+	width: 150px;
+	height: 200px;
+	margin: 20px 0;
+}
